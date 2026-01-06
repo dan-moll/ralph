@@ -31,9 +31,9 @@ Please read these files first before starting:
 
 Then follow the instructions above to pick and complete ONE task."
 
-# Run Claude Code interactively
+# Run Claude Code in print mode (non-interactive but visible)
 cd "$ROOT_DIR"
-claude code "$FULL_PROMPT"
+claude -p "$FULL_PROMPT"
 
 echo
 echo "✅ Iteration complete. Run again to continue, or use ./scripts/ralph.sh for autonomous mode."

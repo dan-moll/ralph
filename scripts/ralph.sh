@@ -53,7 +53,7 @@ Please read these files first before starting:
 Then follow the instructions above to pick and complete ONE task."
 
   cd "$ROOT_DIR"
-  claude code --print "$FULL_PROMPT" | tee "$RUN_LOG"
+  claude -p "$FULL_PROMPT" | tee "$RUN_LOG"
 
   if grep -q "$SENTINEL" "$RUN_LOG"; then
     echo "Sentinel detected. Exiting."
