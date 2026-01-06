@@ -32,8 +32,9 @@ Please read these files first before starting:
 Then follow the instructions above to pick and complete ONE task."
 
 # Run Claude Code in print mode (non-interactive but visible)
+# Allow bypassing permissions for safe operations
 cd "$ROOT_DIR"
-claude -p "$FULL_PROMPT"
+claude -p --permission-mode bypassPermissions "$FULL_PROMPT"
 
 echo
 echo "✅ Iteration complete. Run again to continue, or use ./scripts/ralph.sh for autonomous mode."
