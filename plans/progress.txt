@@ -1,0 +1,6 @@
+# progress.txt (append-only)
+# Purpose: short free-text memory across context windows.
+# Rule: append new entries; don't rewrite old ones.
+
+[2026-01-06] Initialized harness boilerplate.
+- Next: populate plans/PRD.json with real feature stories.

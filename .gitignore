@@ -1,0 +1,11 @@
+# Run logs
+.runs/
+
+# OS files
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Add your project-specific ignores below
