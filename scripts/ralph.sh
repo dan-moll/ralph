@@ -37,12 +37,23 @@ for ((i=1; i<=MAX_ITERS; i++)); do
   #   - Update PRD passes flag + append to progress
   #   - Make a git commit
   #
-  claude code \
-    --prompt-file "$PROMPT_FILE" \
-    --important "$PRD_FILE" \
-    --important "$PROGRESS_FILE" \
-    --important "$ROOT_DIR/init.sh" \
-    | tee "$RUN_LOG"
+
+  # Read the prompt content
+  PROMPT_CONTENT=$(cat "$PROMPT_FILE")
+
+  # Create the full prompt with file references
+  FULL_PROMPT="$PROMPT_CONTENT
+
+Please read these files first before starting:
+- plans/PRD.json (your feature backlog)
+- plans/progress.txt (your memory from previous iterations)
+- init.sh (how to start the project)
+- git log --oneline -20 (recent commits)
+
+Then follow the instructions above to pick and complete ONE task."
+
+  cd "$ROOT_DIR"
+  claude code --print "$FULL_PROMPT" | tee "$RUN_LOG"
 
   if grep -q "$SENTINEL" "$RUN_LOG"; then
     echo "Sentinel detected. Exiting."

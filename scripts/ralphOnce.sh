@@ -17,12 +17,23 @@ echo "PRD: $PRD_FILE"
 echo "Progress: $PROGRESS_FILE"
 echo
 
-# Run Claude Code interactively (no tee to log file)
-claude code \
-  --prompt-file "$PROMPT_FILE" \
-  --important "$PRD_FILE" \
-  --important "$PROGRESS_FILE" \
-  --important "$ROOT_DIR/init.sh"
+# Read the prompt content
+PROMPT_CONTENT=$(cat "$PROMPT_FILE")
+
+# Create the full prompt with file references
+FULL_PROMPT="$PROMPT_CONTENT
+
+Please read these files first before starting:
+- plans/PRD.json (your feature backlog)
+- plans/progress.txt (your memory from previous iterations)
+- init.sh (how to start the project)
+- git log --oneline -20 (recent commits)
+
+Then follow the instructions above to pick and complete ONE task."
+
+# Run Claude Code interactively
+cd "$ROOT_DIR"
+claude code "$FULL_PROMPT"
 
 echo
 echo "✅ Iteration complete. Run again to continue, or use ./scripts/ralph.sh for autonomous mode."
